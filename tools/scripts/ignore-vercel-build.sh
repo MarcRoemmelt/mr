@@ -12,9 +12,9 @@ TS_VERSION=$(node -e "console.log(require('./package.json').devDependencies['typ
 
 # Install @nrwl/workspace in order to run the affected command
 
-npm install -D @nrwl/workspace@$NX_VERSION --prefer-offline
+pnpm install -D @nrwl/workspace@$NX_VERSION --prefer-offline
 
-npm install -D typescript@$TS_VERSION --prefer-offline
+pnpm install -D typescript@$TS_VERSION --prefer-offline
 
 
 # Run the affected command, comparing latest commit to the one before that
