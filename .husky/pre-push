@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+pnpm nx affected:lint &
+pnpm nx affected --target=stylelint &
+pnpm nx affected:test &
+pnpm nx affected --target=build &
+wait

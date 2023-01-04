@@ -1,0 +1,29 @@
+{
+  "name": "fingerprint",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/fingerprint/src",
+  "projectType": "library",
+  "tags": ["client"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/fingerprint/**/*.{ts,svelte,spec.ts}"]
+      }
+    },
+    "check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "svelte-check",
+        "cwd": "libs/fingerprint"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "options": {
+        "config": "vitest.config.ts"
+      }
+    }
+  }
+}

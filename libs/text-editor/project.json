@@ -1,0 +1,29 @@
+{
+  "name": "text-editor",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/text-editor/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/text-editor/**/*.{ts,svelte,spec.ts}"]
+      }
+    },
+    "check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "svelte-check",
+        "cwd": "libs/text-editor"
+      }
+    },
+    "test": {
+      "executor": "@nxext/vitest:vitest",
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}

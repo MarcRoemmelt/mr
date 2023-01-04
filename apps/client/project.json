@@ -1,0 +1,81 @@
+{
+  "name": "client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/client/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nxext/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "frameworkConfigFile": "@nxext/svelte/plugins/vite",
+        "configFile": "apps/client/vite.config.cjs",
+        "outputPath": "dist/apps/client",
+        "assets": [
+          {
+            "glob": "/*",
+            "input": "./public/**",
+            "output": "./"
+          }
+        ],
+        "tsConfig": "apps/client/tsconfig.app.json"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "compile": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "pnpx google-closure-compiler --entry_point=dist/apps/client/assets/index.js --js=dist/apps/client/**.js --compilation_level ADVANCED_OPTIMIZATIONS --js_output_file=dist/apps/client/assets/index-compiled.js --warning_level=QUIET",
+          "rm dist/apps/client/assets/index.js",
+          "mv dist/apps/client/assets/index-compiled.js dist/apps/client/assets/index.js"
+        ]
+      }
+    },
+    "compress": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpx gzip-cli dist/apps/client/**/*.js -e=br -e=gz"]
+      }
+    },
+    "serve": {
+      "executor": "@nxext/vite:dev",
+      "options": {
+        "frameworkConfigFile": "@nxext/svelte/plugins/vite",
+        "outputPath": "dist/apps/client",
+        "assets": [
+          {
+            "glob": "/*",
+            "input": "./public/**",
+            "output": "./"
+          }
+        ],
+        "tsConfig": "apps/client/tsconfig.app.json"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/client/**/*.{ts,svelte,spec.ts}"]
+      }
+    },
+    "check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "svelte-check",
+        "cwd": "apps/client"
+      }
+    },
+    "test": {
+      "executor": "@nxext/vitest:vitest",
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}
