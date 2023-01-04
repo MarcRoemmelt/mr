@@ -14,6 +14,8 @@
 </div>
 
 <style lang="scss">
+  @use 'sass:math';
+
   $-background: rgba(195, 195, 195, 0.3);
 
   .wrapper {
@@ -34,7 +36,7 @@
       box-sizing: content-box;
       height: 96px;
       width: 96px;
-      $factor: 96 / 48;
+      $factor: math.div(96, 48);
 
       :global(svg) {
         transform: scale($factor);
