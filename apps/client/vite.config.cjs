@@ -16,7 +16,7 @@ function inlineInitialCss() {
     generateBundle(options, bundle, isWrite) {
       const fileNames = Object.keys(bundle);
       const initialCssFile = fileNames.find((fileName) =>
-        /^assets\/index\.[a-z0-9]+\.css$/.test(fileName)
+        /^assets\/index-[a-z0-9]+\.css$/.test(fileName)
       );
       const htmlFile = fileNames.find((fileName) =>
         /index\.html/.test(fileName)
